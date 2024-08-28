@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+}
+
+@layer utilities {
+  .flex-3 {
+    flex: 3;
+  }
+
+  .flex-2 {
+    flex: 2;
+  }
+}
+
+@layer components {
+  .hover-navbar {
+    @apply transition ease-in-out delay-75  hover:-translate-y-1  hover:font-medium duration-300 sm:hidden;
+  }
+
+  .hover-menu {
+    @apply transition ease-in-out delay-75  hover:-translate-y-1  hover:font-medium duration-300;
+  }
+}
