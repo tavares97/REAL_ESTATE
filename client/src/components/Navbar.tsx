@@ -9,19 +9,19 @@ const Navbar = () => {
     <nav className="flex items-center justify-between h-[100px] z-50 ">
       {/* LEFT */}
       <div className="flex-3 flex items-center gap-[50px]">
-        <a className="cursor-pointer ">
+        <a href="/" className="cursor-pointer ">
           <Logo />
         </a>
         <a href="/" className="hover-navbar">
           Home
         </a>
-        <a href="/" className="hover-navbar">
+        <a href="/about" className="hover-navbar">
           About
         </a>
-        <a href="/" className="hover-navbar">
+        <a href="/contacts" className="hover-navbar">
           Contacts
         </a>
-        <a href="/" className="hover-navbar">
+        <a href="/agents" className="hover-navbar">
           Agents
         </a>
       </div>
