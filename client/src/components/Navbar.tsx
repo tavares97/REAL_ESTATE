@@ -1,9 +1,13 @@
+import { Link } from "react-router-dom";
 import { List } from "@phosphor-icons/react";
 import Logo from "./Logo";
 import { useState } from "react";
+import { userData } from "../lib/dummyData";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+
+  const user = true;
 
   return (
     <nav className="flex items-center justify-between h-[100px] z-50 ">
@@ -27,15 +31,40 @@ const Navbar = () => {
       </div>
       {/* RIGHT */}
       <div className="flex-2 flex items-center justify-end bg-[#fcf5f3] h-full md:bg-transparent sm:bg-transparent ">
-        <a href="/" className="hover-navbar">
-          Sign In
-        </a>
-        <a
-          href="/"
-          className="bg-[#fece51] py-2 px-6 m-5 hover-navbar rounded-md"
-        >
-          Sign Up
-        </a>
+        {user ? (
+          <div className="flex font-bold px-5">
+            <Link to="/profile" className="flex items-center">
+              <img
+                src={userData.img}
+                alt="user"
+                className="w-10 h-10 rounded-full object-cover mr-2"
+              />
+              <span className="sm:hidden">{userData.name}</span>
+            </Link>
+
+            <Link
+              to="/profile"
+              className="py-3 px-5 bg-amber-200 cursor-pointer rounded-md ml-5 relative sm:hidden"
+            >
+              <div className="absolute -top-1 -right-1 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center">
+                3
+              </div>
+              Profile
+            </Link>
+          </div>
+        ) : (
+          <>
+            <a href="/" className="hover-navbar">
+              Sign In
+            </a>
+            <a
+              href="/"
+              className="bg-[#fece51] py-2 px-6 m-5 hover-navbar rounded-md"
+            >
+              Sign Up
+            </a>
+          </>
+        )}
 
         <List
           size={32}
@@ -45,7 +74,7 @@ const Navbar = () => {
         />
 
         <div
-          className={`fixed bg-black text-white h-screen w-1/2 top-0 right-0 transform ${
+          className={`fixed bg-black text-white h-screen w-1/2 top-0 right-0 transform z-30 ${
             open ? "translate-x-0" : "translate-x-full"
           } transition-transform duration-500 ease-in-out flex flex-col items-center justify-center gap-14`}
         >

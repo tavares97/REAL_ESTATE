@@ -15,8 +15,8 @@ type ListCardProps = {
 
 const ListCard = ({ listItem }: ListCardProps) => {
   return (
-    <div className="flex gap-5">
-      <Link to={`/list/${listItem.id}`} className="flex-2 h-48">
+    <div className="flex gap-5 sm:flex-col">
+      <Link to={`/list/${listItem.id}`} className="flex-2 h-48 ">
         <img
           src={listItem.img}
           alt="house"
@@ -41,11 +41,12 @@ const ListCard = ({ listItem }: ListCardProps) => {
           <div className="flex gap-5 text-sm">
             <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-md">
               <Bed size={16} />
-              <span>{listItem.bedroom} Bedroom</span>
+              {listItem.bedroom} <span> Bedroom</span>
             </div>
             <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-md">
               <Bathtub size={16} />
-              <span>{listItem.bathroom} Bathroom</span>
+              {listItem.bathroom}
+              <span> Bathroom</span>
             </div>
           </div>
 

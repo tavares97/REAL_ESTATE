@@ -1,7 +1,7 @@
 export type ListData = {
   id: number;
   title: string;
-  img: string;
+  img?: string;
   bedroom: number;
   bathroom: number;
   price: number;
@@ -102,12 +102,12 @@ export const listData: ListData[] = [
   },
 ];
 
-export type singlePostData = {
+export interface singlePostData extends ListData {
   id: number;
   title: string;
   price: number;
   images: string[];
-  bedRooms: number;
+  bedroom: number;
   bathroom: number;
   size: number;
   latitude: number;
@@ -118,7 +118,7 @@ export type singlePostData = {
   description: string;
   bus: string;
   restaurant: string;
-};
+}
 
 export const singlePostData: singlePostData = {
   id: 1,
@@ -130,11 +130,11 @@ export const singlePostData: singlePostData = {
     "https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     "https://images.pexels.com/photos/2467285/pexels-photo-2467285.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   ],
-  bedRooms: 2,
+  bedroom: 2,
   bathroom: 1,
   size: 861,
-  latitude: 51.5074,
-  longitude: -0.1278,
+  latitude: 38.876854120314974,
+  longitude: -9.082577310414559,
   city: "London",
   address: "1234 Broadway St",
   school: "250m away",
@@ -147,5 +147,6 @@ export const singlePostData: singlePostData = {
 export const userData = {
   id: 1,
   name: "John Doe",
+  email: "Xy0oI@example.com",
   img: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
 };

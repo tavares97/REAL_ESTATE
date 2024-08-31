@@ -9,8 +9,6 @@ interface ImageSliderProps {
 const ImageSlider = ({ images }: ImageSliderProps) => {
   const [imageIndex, setImageIndex] = useState<number | null>(null);
 
-  console.log(images.length);
-
   const changeImage = (direction: number) => {
     if (imageIndex !== null) {
       setImageIndex(
@@ -20,7 +18,7 @@ const ImageSlider = ({ images }: ImageSliderProps) => {
   };
 
   return (
-    <div className="flex w-full h-80 gap-5">
+    <div className="flex w-full h-80 gap-5 z-auto">
       {imageIndex !== null && (
         <div className="absolute w-screen h-screen top-0 left-0 bg-black bg-opacity-90 flex justify-between items-center">
           <div className="flex-1 ml-3 cursor-pointer">

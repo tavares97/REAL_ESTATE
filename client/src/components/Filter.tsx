@@ -22,7 +22,7 @@ const Filter = () => {
         </div>
       </div>
       {/* BOTTOM */}
-      <div className="flex justify-between gap-5 ">
+      <div className="flex justify-between gap-5 sm:flex-col ">
         <div className="flex flex-col gap-[2px]">
           <label htmlFor="type" className="text-xs">
             Type
@@ -30,7 +30,7 @@ const Filter = () => {
           <select
             name="type"
             id="type"
-            className="w-24 p-2 border border-[#e0e0e0] text-sm rounded-md"
+            className="w-24 p-2 border border-[#e0e0e0] text-sm rounded-md sm:w-full"
           >
             <option value="any">Any</option>
             <option value="buy">Buy</option>
@@ -44,7 +44,7 @@ const Filter = () => {
           <select
             name="property"
             id="property"
-            className="w-24 p-2 border border-[#e0e0e0] text-sm rounded-md"
+            className="w-24 p-2 border border-[#e0e0e0] text-sm rounded-md sm:w-full"
           >
             <option value="any">Any</option>
             <option value="apartment">Apartment</option>
@@ -62,7 +62,7 @@ const Filter = () => {
             id="minPrice"
             name="minPrice"
             placeholder="Min Price"
-            className="w-24 p-2 border border-[#e0e0e0] text-sm rounded-md"
+            className="w-24 p-2 border border-[#e0e0e0] text-sm rounded-md sm:w-full"
           />
         </div>
         <div className="flex flex-col gap-[2px]">
@@ -74,7 +74,7 @@ const Filter = () => {
             id="maxPrice"
             name="maxPrice"
             placeholder="Max Price"
-            className="w-24 p-2 border border-[#e0e0e0] text-sm rounded-md"
+            className="w-24 p-2 border border-[#e0e0e0] text-sm rounded-md sm:w-full"
           />
         </div>
         <div className="flex flex-col gap-[2px]">
@@ -86,11 +86,11 @@ const Filter = () => {
             id="bedroom"
             name="bedroom"
             placeholder="any"
-            className="w-24 p-2 border border-[#e0e0e0] text-sm rounded-md"
+            className="w-24 p-2 border border-[#e0e0e0] text-sm rounded-md sm:w-full"
           />
         </div>
 
-        <button className="w-24 p-2 cursor-pointer flex items-center justify-center bg-[#fece51] rounded-md ">
+        <button className="w-24 p-2 cursor-pointer flex items-center justify-center bg-[#fece51] rounded-md sm:w-full">
           <MagnifyingGlass size={20} />
         </button>
       </div>
