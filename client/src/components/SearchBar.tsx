@@ -14,8 +14,9 @@ const SearchBar = () => {
   return (
     <div className="">
       <div>
-        {types.map((type) => (
+        {types.map((type, index) => (
           <button
+            key={index}
             onClick={() => setQuery({ ...query, type })}
             className={`${
               query.type === type

@@ -1,8 +1,22 @@
 import List from "../components/List";
 import Messages from "../components/Messages";
+import apiRequest from "../lib/apiRequest";
+import { useNavigate } from "react-router-dom";
 import { userData } from "../lib/dummyData";
 
 const ProfilePage = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await apiRequest.post("/auth/logout");
+      localStorage.removeItem("user");
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="flex h-full md:flex-col md:overflow-scroll sm:flex-col sm:overflow-scroll">
       <div className="flex-3 overflow-y-scroll pb-10 md:flex-none sm:flex-none ">
@@ -30,6 +44,13 @@ const ProfilePage = () => {
             <span className="flex gap-5 items-center">
               Email: <b>{userData.email}</b>
             </span>
+
+            <button
+              className="p-1 w-28 rounded-md border border-red-500 cursor-pointer hover:bg-red-500 hover:text-white"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           </div>
 
           <div className="flex justify-between items-center">

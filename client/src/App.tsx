@@ -5,6 +5,7 @@ import Layout from "./routes/Layout";
 import ListPage from "./routes/ListPage";
 import LoginPage from "./routes/LoginPage";
 import ProfilePage from "./routes/ProfilePage";
+import Register from "./routes/Register";
 import SinglePage from "./routes/SinglePage";
 
 function App() {
@@ -24,6 +25,10 @@ function App() {
         {
           path: "/login",
           element: <LoginPage />,
+        },
+        {
+          path: "/register",
+          element: <Register />,
         },
         {
           path: "/list/:id",
