@@ -1,21 +1,36 @@
 import List from "../components/List";
 import Messages from "../components/Messages";
 import apiRequest from "../lib/apiRequest";
+import { useAuthStore } from "../store/authStore";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { userData } from "../lib/dummyData";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
 
+  const { user, updateUser } = useAuthStore();
+
+  console.log(user);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
+
   const handleLogout = async () => {
     try {
       await apiRequest.post("/auth/logout");
-      localStorage.removeItem("user");
+      updateUser(null);
       navigate("/login");
     } catch (error) {
       console.log(error);
     }
   };
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="flex h-full md:flex-col md:overflow-scroll sm:flex-col sm:overflow-scroll">
@@ -32,17 +47,17 @@ const ProfilePage = () => {
             <span className="flex gap-5 items-center">
               Avatar:
               <img
-                src={userData.img}
+                src={user?.avatar || "/avatar.png"}
                 alt=""
                 className="w-10 h-10 rounded-full object-cover"
               />
             </span>
 
             <span className="flex gap-5 items-center">
-              Username: <b>{userData.name}</b>
+              Username: <b>{user?.username}</b>
             </span>
             <span className="flex gap-5 items-center">
-              Email: <b>{userData.email}</b>
+              Email: <b>{user?.email}</b>
             </span>
 
             <button

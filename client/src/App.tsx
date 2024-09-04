@@ -1,7 +1,7 @@
+import { Layout, PrivateRoute } from "./routes/Layout";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import HomePage from "./routes/HomePage";
-import Layout from "./routes/Layout";
 import ListPage from "./routes/ListPage";
 import LoginPage from "./routes/LoginPage";
 import ProfilePage from "./routes/ProfilePage";
@@ -34,6 +34,12 @@ function App() {
           path: "/list/:id",
           element: <SinglePage />,
         },
+      ],
+    },
+    {
+      path: "/",
+      element: <PrivateRoute />,
+      children: [
         {
           path: "/profile",
           element: <ProfilePage />,

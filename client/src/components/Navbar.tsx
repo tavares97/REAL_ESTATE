@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { List } from "@phosphor-icons/react";
 import Logo from "./Logo";
+import { useAuthStore } from "../store/authStore";
 import { useState } from "react";
-import { userData } from "../lib/dummyData";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  const user = true;
+  const { user } = useAuthStore();
 
   return (
     <nav className="flex items-center justify-between h-[100px] z-50 ">
@@ -35,11 +35,11 @@ const Navbar = () => {
           <div className="flex font-bold px-5">
             <Link to="/profile" className="flex items-center">
               <img
-                src={userData.img}
+                src={user.avatar || "/avatar.png"}
                 alt="user"
                 className="w-10 h-10 rounded-full object-cover mr-2"
               />
-              <span className="sm:hidden">{userData.name}</span>
+              <span className="sm:hidden">{user.username}</span>
             </Link>
 
             <Link
@@ -54,7 +54,7 @@ const Navbar = () => {
           </div>
         ) : (
           <>
-            <a href="/" className="hover-navbar">
+            <a href="/login" className="hover-navbar">
               Sign In
             </a>
             <a
@@ -90,7 +90,7 @@ const Navbar = () => {
           <a href="/" className="hover-menu">
             Agents
           </a>
-          <a href="/" className="hover-menu">
+          <a href="/login" className="hover-menu">
             Sign In
           </a>
           <a href="/" className="hover-menu">
