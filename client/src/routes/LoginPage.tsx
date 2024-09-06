@@ -16,8 +16,7 @@ const LoginPage = () => {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
-    const username = formData.get("username");
-    const password = formData.get("password");
+    const { username, password } = Object.fromEntries(formData);
 
     try {
       setLoading(true);
@@ -25,6 +24,9 @@ const LoginPage = () => {
         username,
         password,
       });
+
+      const token = response.data.token;
+      localStorage.setItem("token", token);
 
       updateUser(response.data.user);
 

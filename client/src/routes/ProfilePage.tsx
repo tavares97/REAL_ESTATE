@@ -1,9 +1,10 @@
+import { Link, useNavigate } from "react-router-dom";
+
 import List from "../components/List";
 import Messages from "../components/Messages";
 import apiRequest from "../lib/apiRequest";
 import { useAuthStore } from "../store/authStore";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -38,9 +39,11 @@ const ProfilePage = () => {
         <div className="pr-12 flex flex-col gap-5 sm:pr-0">
           <div className="flex justify-between items-center">
             <h1 className="font-light text-2xl">User Information</h1>
-            <button className="py-2 px-4 rounded-md bg-amber-200 cursor-pointer">
-              Update Profile
-            </button>
+            <Link to="/profile/update">
+              <button className="py-2 px-4 rounded-md bg-amber-200 cursor-pointer">
+                Update Profile
+              </button>
+            </Link>
           </div>
 
           <div className="flex flex-col gap-2">

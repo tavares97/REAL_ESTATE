@@ -53,21 +53,13 @@ export const login = async (req: Request, res: Response) => {
       expiresIn: process.env.JWT_EXPIRES_IN || "1d",
     });
 
-    const age = process.env.COOKIE_MAX_AGE
-      ? parseInt(process.env.COOKIE_MAX_AGE)
-      : 1000 * 60 * 60 * 24 * 7;
-
     const { password: _, ...userInfo } = user;
 
-    res
-      .cookie("token", token, {
-        httpOnly: true,
-        maxAge: age,
-        sameSite: process.env.NODE_ENV === "production" ? "strict" : "none",
-        secure: process.env.NODE_ENV === "production",
-      })
-      .status(200)
-      .json({ message: "Login successful", user: userInfo });
+    res.status(200).json({
+      message: "Login successful",
+      token,
+      user: userInfo,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Error on login", error });

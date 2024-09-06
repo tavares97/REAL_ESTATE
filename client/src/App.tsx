@@ -5,6 +5,7 @@ import HomePage from "./routes/HomePage";
 import ListPage from "./routes/ListPage";
 import LoginPage from "./routes/LoginPage";
 import ProfilePage from "./routes/ProfilePage";
+import ProfileUpdatePage from "./routes/ProfileUpdatePage";
 import Register from "./routes/Register";
 import SinglePage from "./routes/SinglePage";
 
@@ -43,6 +44,10 @@ function App() {
         {
           path: "/profile",
           element: <ProfilePage />,
+        },
+        {
+          path: "/profile/update",
+          element: <ProfileUpdatePage />,
         },
       ],
     },

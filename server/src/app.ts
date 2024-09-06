@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import express from "express";
 import postRoute from "./routes/post.route";
 import testRoute from "./routes/test.route";
+import userRoute from "./routes/user.route";
 
 dotenv.config();
 
@@ -20,8 +21,9 @@ app.use(
   })
 );
 
-app.use("/api/post", postRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
+app.use("/api/post", postRoute);
 app.use("/api/test", testRoute);
 
 app.listen(port, () => {
