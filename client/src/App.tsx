@@ -1,13 +1,19 @@
 import { Layout, PrivateRoute } from "./routes/Layout";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  LoaderFunctionArgs,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
+import { postsLoader, singlePostLoader } from "./lib/loader";
 
+import CreatePostPage from "./routes/CreatePostPage";
 import HomePage from "./routes/HomePage";
 import ListPage from "./routes/ListPage";
 import LoginPage from "./routes/LoginPage";
 import ProfilePage from "./routes/ProfilePage";
 import ProfileUpdatePage from "./routes/ProfileUpdatePage";
 import Register from "./routes/Register";
-import SinglePage from "./routes/SinglePage";
+import SinglePost from "./routes/SinglePost";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,10 +26,6 @@ function App() {
           element: <HomePage />,
         },
         {
-          path: "/list",
-          element: <ListPage />,
-        },
-        {
           path: "/login",
           element: <LoginPage />,
         },
@@ -32,8 +34,15 @@ function App() {
           element: <Register />,
         },
         {
+          path: "/list",
+          element: <ListPage />,
+          loader: ({ request }: LoaderFunctionArgs) => postsLoader(request),
+        },
+        {
           path: "/list/:id",
-          element: <SinglePage />,
+          element: <SinglePost />,
+          loader: ({ params }: LoaderFunctionArgs) =>
+            singlePostLoader({ id: params.id }),
         },
       ],
     },
@@ -48,6 +57,10 @@ function App() {
         {
           path: "/profile/update",
           element: <ProfileUpdatePage />,
+        },
+        {
+          path: "/post/create",
+          element: <CreatePostPage />,
         },
       ],
     },

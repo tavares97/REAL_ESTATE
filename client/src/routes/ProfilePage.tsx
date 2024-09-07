@@ -11,8 +11,6 @@ const ProfilePage = () => {
 
   const { user, updateUser } = useAuthStore();
 
-  console.log(user);
-
   useEffect(() => {
     if (!user) {
       navigate("/login");
@@ -73,9 +71,11 @@ const ProfilePage = () => {
 
           <div className="flex justify-between items-center">
             <h1 className="font-light text-2xl">My List</h1>
-            <button className="py-2 px-4 rounded-md bg-amber-200 cursor-pointer">
-              Create New Post
-            </button>
+            <Link to="/post/create">
+              <button className="py-2 px-4 rounded-md bg-amber-200 cursor-pointer">
+                Create New Post
+              </button>
+            </Link>
           </div>
           <List />
 

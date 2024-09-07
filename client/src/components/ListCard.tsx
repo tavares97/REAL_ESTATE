@@ -7,10 +7,10 @@ import {
 } from "@phosphor-icons/react";
 
 import { Link } from "react-router-dom";
-import { ListData } from "../lib/dummyData";
+import { Post } from "@/types/types";
 
 type ListCardProps = {
-  listItem: ListData;
+  listItem: Post;
 };
 
 const ListCard = ({ listItem }: ListCardProps) => {
@@ -18,7 +18,7 @@ const ListCard = ({ listItem }: ListCardProps) => {
     <div className="flex gap-5 sm:flex-col">
       <Link to={`/list/${listItem.id}`} className="flex-2 h-48 ">
         <img
-          src={listItem.img}
+          src={listItem.images[0]}
           alt="house"
           className=" w-full h-full object-cover rounded-md"
         />

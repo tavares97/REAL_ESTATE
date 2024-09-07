@@ -1,15 +1,21 @@
+import { Link } from "react-router-dom";
 import { MagnifyingGlass } from "@phosphor-icons/react";
+import { QueryParams } from "@/types/types";
 import { useState } from "react";
 
-const types = ["buy", "rent"];
+const types = ["BUY", "RENT"];
 
 const SearchBar = () => {
-  const [query, setQuery] = useState({
-    type: "buy",
+  const [query, setQuery] = useState<QueryParams>({
+    type: "BUY",
     location: "",
     minPrice: 0,
-    maxPrice: 0,
+    maxPrice: 1000000,
   });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery({ ...query, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className="">
@@ -42,6 +48,7 @@ const SearchBar = () => {
           name="location"
           placeholder="City Location"
           className="px-2 w-[200px] lg:p-1 lg:w-[140px] md:w-auto sm:p-5 sm:border sm:w-full sm:rounded-md"
+          onChange={handleChange}
         />
         <input
           type="text"
@@ -50,6 +57,7 @@ const SearchBar = () => {
           max={10000000}
           placeholder="Min Price"
           className="px-2 w-[200px] lg:p-1 lg:w-[140px] md:w-auto sm:p-5 sm:border sm:w-full sm:rounded-md"
+          onChange={handleChange}
         />
         <input
           type="text"
@@ -58,11 +66,17 @@ const SearchBar = () => {
           max={10000000}
           placeholder="Max Price"
           className="px-2 w-[200px] lg:p-1 lg:w-[140px] md:w-auto sm:p-5 sm:border sm:w-full sm:rounded-md"
+          onChange={handleChange}
         />
 
-        <button className="cursor-pointer hover:bg-[#fece51] hover:bg-opacity-70 bg-[#fece51] flex items-center justify-center p-3 sm:rounded-md">
-          <MagnifyingGlass size={20} />
-        </button>
+        <Link
+          to={`/list?type=${query.type}`}
+          className="cursor-pointer hover:bg-[#fece51] hover:bg-opacity-70 bg-[#fece51] flex items-center justify-center p-3 sm:rounded-md"
+        >
+          <button>
+            <MagnifyingGlass size={20} />
+          </button>
+        </Link>
       </form>
     </div>
   );

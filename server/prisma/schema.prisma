@@ -14,11 +14,60 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  username String @unique
-  email    String @unique
-  password String
-  avatar   String?
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  username  String   @unique
+  email     String   @unique
+  password  String
+  avatar    String?
+  Posts     Post[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id        String       @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  price     Int
+  images    String[]
+  address   String
+  city      String
+  bedroom   Int
+  bathroom  Int
+  latitude  Float
+  longitude Float
+  type      PostType
+  property  PropertyType
+  userId    String       @db.ObjectId
+  user      User         @relation(fields: [userId], references: [id])
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  PostDetail PostDetail?
+}
+
+model PostDetail {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  description String
+  utilities   String?
+  pet         String?
+  income      String?
+  size        Int?
+  school      Int?
+  bus         Int?
+  restaurant  Int?
+
+  post   Post   @relation(fields: [postId], references: [id])
+  postId String @unique @db.ObjectId
+}
+
+enum PostType {
+  BUY
+  RENT
+}
+
+enum PropertyType {
+  HOUSE
+  APARTMENT
+  LAND
+  CONDO
 }

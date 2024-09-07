@@ -53,3 +53,9 @@ body {
     @apply transition ease-in-out delay-75  hover:-translate-y-1  hover:font-medium duration-300;
   }
 }
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}

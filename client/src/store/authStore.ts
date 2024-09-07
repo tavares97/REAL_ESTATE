@@ -1,4 +1,4 @@
-import { User } from "../types/User";
+import { User } from "../types/types";
 import { create } from "zustand";
 
 interface AuthStore {

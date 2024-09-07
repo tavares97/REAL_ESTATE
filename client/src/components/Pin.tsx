@@ -1,19 +1,20 @@
 import { Marker, Popup } from "react-leaflet";
 
 import { Link } from "react-router-dom";
-import { ListData } from "../lib/dummyData";
+import { Post } from "../types/types";
 
 interface PinProps {
-  pin: ListData;
+  pin: Post;
 }
 
 const Pin = ({ pin }: PinProps) => {
+  console.log(pin);
   return (
     <Marker position={[pin.latitude, pin.longitude]}>
       <Popup>
         <div className="flex gap-5 min-w-60">
           <img
-            src={pin.img}
+            src="{pin.images[0]}"
             alt="house"
             className="w-16 h-12 object-cover rounded-md"
           />

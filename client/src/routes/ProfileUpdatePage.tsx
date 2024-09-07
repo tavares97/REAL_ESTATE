@@ -2,12 +2,15 @@ import UploadWidget from "../components/UploadWidget";
 import apiRequest from "../lib/apiRequest";
 import axios from "axios";
 import { useAuthStore } from "../store/authStore";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const ProfileUpdatePage = () => {
   const { user, updateUser } = useAuthStore();
+  const navigate = useNavigate();
 
   const [error, setError] = useState(false);
+  const [avatar, setAvatar] = useState<string[]>([]);
 
   const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,9 +24,11 @@ const ProfileUpdatePage = () => {
         username,
         email,
         password,
+        avatar: avatar[0],
       });
 
       updateUser(response.data);
+      navigate("/profile");
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         setError(error.response.data.message);
@@ -32,9 +37,9 @@ const ProfileUpdatePage = () => {
   };
 
   return (
-    <div className="h-full flex">
-      <div className="flex-3 flex items-center justify-center">
-        <form className="flex flex-col gap-5" onSubmit={handleUpdate}>
+    <div className="h-full flex md:flex-col md:overflow-scroll sm:flex-col sm:overflow-scroll">
+      <div className="flex-3 flex items-center justify-center md:flex-none sm:flex-none">
+        <form className="flex flex-col gap-5 sm:pr-0" onSubmit={handleUpdate}>
           <h1 className="text-2xl font-bold">Update Profile</h1>
           <div className="flex flex-col gap-1">
             <label htmlFor="username" className="text-sm text-gray-500">
@@ -77,9 +82,13 @@ const ProfileUpdatePage = () => {
           {error && <span>error</span>}
         </form>
       </div>
-      <div className="flex-2 bg-[#fcf5f3] flex flex-col gap-5 items-center justify-center">
-        <img src={user?.avatar || "/avatar.png"} alt="" className="avatar" />
-        <UploadWidget />
+      <div className="flex-2 bg-[#fcf5f3]  md:bg-white sm:bg-white flex flex-col gap-5 items-center justify-center md:flex-none sm:flex-none sm:mt-10 ">
+        <img
+          src={avatar[0] || user?.avatar || "/avatar.png"}
+          alt=""
+          className="avatar"
+        />
+        <UploadWidget setState={setAvatar} />
       </div>
     </div>
   );

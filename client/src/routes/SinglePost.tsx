@@ -12,49 +12,50 @@ import {
   PawPrint,
   Toolbox,
 } from "@phosphor-icons/react";
-import { singlePostData, userData } from "../lib/dummyData";
 
 import ImageSlider from "../components/ImageSlider";
 import Map from "../components/Map";
+import { Post } from "@/types/types";
+import { useLoaderData } from "react-router-dom";
 
-const SinglePage = () => {
-  const data = singlePostData;
+const SinglePost = () => {
+  const { post } = useLoaderData() as { post: Post };
 
   return (
     <div className="flex h-full md:flex-col md:overflow-scroll sm:flex-col sm:overflow-auto">
       <div className="flex-3  overflow-y-scroll pb-5 z-20 h-full md:flex-none md:h-max md:mb-8 sm:flex-none sm:h-max sm:mb-8 ">
         <div className="pr-12 sm:pr-0 ">
-          <ImageSlider images={data.images} />
+          <ImageSlider images={post.images} />
 
           <div className="mt-12">
             <div className="flex justify-between sm:flex-col sm:gap-2 ">
               <div className="flex flex-col gap-5">
                 <h1 className="text-2xl font-semibold text-[#444]">
-                  {data.title}
+                  {post.title}
                 </h1>
 
                 <div className="flex items-center gap-1 text-slate-400 text-sm">
                   <MapPinSimple size={16} />
-                  <span>{data.address}</span>
+                  <span>{post.address}</span>
                 </div>
 
                 <div className="text-xl font-light p-1 rounded-md bg-amber-200 w-max">
-                  € {data.price}
+                  € {post.price}
                 </div>
               </div>
 
               <div className="flex flex-col gap-2 items-center justify-center p-6 rounded-md bg-amber-100 sm:p-3 ">
                 <img
-                  src={userData.img}
+                  src={post.user.avatar}
                   alt=""
                   className="w-12 h-12 rounded-full object-cover"
                 />
-                <span>{userData.name}</span>
+                <span>{post.user.username}</span>
               </div>
             </div>
 
             <div className="mt-12 text-neutral-500 leading-5">
-              {data.description}
+              {post.PostDetail.description}
             </div>
           </div>
         </div>
@@ -68,23 +69,21 @@ const SinglePage = () => {
               <Toolbox size={24} />
               <div>
                 <span className="font-bold">Utilities</span>
-                <p className="text-sm">Renter is responsible</p>
+                <p className="text-sm">{post.PostDetail.utilities}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <PawPrint size={24} />
               <div>
                 <span className="font-bold">Pet Policy</span>
-                <p className="text-sm">Pets Allowed</p>
+                <p className="text-sm">{post.PostDetail.pet}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <HandCoins size={24} />
               <div>
                 <span className="font-bold">Property Fees</span>
-                <p className="text-sm">
-                  Must have 3x the rent in total household income
-                </p>
+                <p className="text-sm">{post.PostDetail.income}</p>
               </div>
             </div>
           </div>
@@ -93,15 +92,15 @@ const SinglePage = () => {
           <div className="flex justify-between lg:text-xs sm:flex-col">
             <div className="flex items-center gap-2 bg-white p-2 rounded-md">
               <FrameCorners size={24} />
-              <span>80 sqft</span>
+              <span>{post.PostDetail.size} sqft</span>
             </div>
             <div className="flex items-center gap-2 bg-white p-2 rounded-md">
               <Bed size={24} />
-              <span>{data.bedroom} bed</span>
+              <span>{post.bedroom} bed</span>
             </div>
             <div className="flex items-center gap-2 bg-white p-2 rounded-md">
               <Bathtub size={24} />
-              <span>{data.bathroom} bathroom</span>
+              <span>{post.bathroom} bathroom</span>
             </div>
           </div>
 
@@ -111,28 +110,28 @@ const SinglePage = () => {
               <GraduationCap size={24} />
               <div>
                 <span className="font-bold ">School</span>
-                <p className="text-sm">{data.school}</p>
+                <p className="text-sm">{post.PostDetail.school}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <Bus size={24} />
               <div>
                 <span className="font-bold ">Bus stop</span>
-                <p className="text-sm">{data.bus}</p>
+                <p className="text-sm">{post.PostDetail.bus}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <ForkKnife size={24} />
               <div>
                 <span className="font-bold">Restaurant</span>
-                <p className="text-sm">{data.restaurant}</p>
+                <p className="text-sm">{post.PostDetail.restaurant}</p>
               </div>
             </div>
           </div>
 
           <p className="text-lg font-bold mb-2">Location</p>
           <div className="w-full h-44 ">
-            <Map pins={[data]} />
+            <Map pins={[post]} />
           </div>
 
           <div className="flex justify-between mt-2 ">
@@ -151,4 +150,4 @@ const SinglePage = () => {
   );
 };
 
-export default SinglePage;
+export default SinglePost;
