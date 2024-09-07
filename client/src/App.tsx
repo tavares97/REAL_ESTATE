@@ -4,7 +4,7 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
-import { postsLoader, singlePostLoader } from "./lib/loader";
+import { postsLoader, savedPostsLoader, singlePostLoader } from "./lib/loader";
 
 import CreatePostPage from "./routes/CreatePostPage";
 import HomePage from "./routes/HomePage";
@@ -53,6 +53,7 @@ function App() {
         {
           path: "/profile",
           element: <ProfilePage />,
+          loader: () => savedPostsLoader(),
         },
         {
           path: "/profile/update",

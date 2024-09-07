@@ -19,14 +19,11 @@ const Navbar = () => {
         <a href="/" className="hover-navbar">
           Home
         </a>
-        <a href="/about" className="hover-navbar">
-          About
+        <a href="/list" className="hover-navbar">
+          Lists
         </a>
         <a href="/contacts" className="hover-navbar">
           Contacts
-        </a>
-        <a href="/agents" className="hover-navbar">
-          Agents
         </a>
       </div>
       {/* RIGHT */}
@@ -81,15 +78,13 @@ const Navbar = () => {
           <a href="/" className="hover-menu">
             Home
           </a>
-          <a href="/" className="hover-menu">
-            About
+          <a href="/list" className="hover-menu">
+            Lists
           </a>
-          <a href="/" className="hover-menu">
+          <a href="/contacts" className="hover-menu">
             Contacts
           </a>
-          <a href="/" className="hover-menu">
-            Agents
-          </a>
+
           <a href="/login" className="hover-menu">
             Sign In
           </a>

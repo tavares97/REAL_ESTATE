@@ -3,7 +3,6 @@ import {
   Bed,
   BookmarkSimple,
   Bus,
-  Chat,
   ForkKnife,
   FrameCorners,
   GraduationCap,
@@ -12,14 +11,35 @@ import {
   PawPrint,
   Toolbox,
 } from "@phosphor-icons/react";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 import ImageSlider from "../components/ImageSlider";
 import Map from "../components/Map";
 import { Post } from "@/types/types";
-import { useLoaderData } from "react-router-dom";
+import apiRequest from "@/lib/apiRequest";
+import { useAuthStore } from "@/store/authStore";
+import { useState } from "react";
 
 const SinglePost = () => {
-  const { post } = useLoaderData() as { post: Post };
+  const { post, isSaved } = useLoaderData() as { post: Post; isSaved: boolean };
+  const { user } = useAuthStore();
+  const navigate = useNavigate();
+
+  const [saved, setIsSaved] = useState(isSaved);
+
+  const handleSavePost = async () => {
+    setIsSaved(!saved);
+    if (!user) {
+      navigate("/login");
+    }
+
+    try {
+      await apiRequest.post("/post/save", { postId: post.id });
+    } catch (error) {
+      console.log(error);
+      setIsSaved(!saved);
+    }
+  };
 
   return (
     <div className="flex h-full md:flex-col md:overflow-scroll sm:flex-col sm:overflow-auto">
@@ -135,13 +155,18 @@ const SinglePost = () => {
           </div>
 
           <div className="flex justify-between mt-2 ">
-            <button className="p-2 flex items-center gap-2 bg-white rounded-md border cursor-pointer hover:bg-amber-100 sm:bg-amber-200 ">
-              <Chat size={24} />
-              <span className="sm:hidden"> Send a Message</span>
-            </button>
-            <button className="p-2 flex items-center gap-2 bg-white rounded-md border cursor-pointer  hover:bg-amber-100 sm:bg-amber-200">
-              <BookmarkSimple size={24} />
-              <span className="sm:hidden"> Save this Place</span>
+            <button
+              className="p-2 flex items-center gap-2 bg-white rounded-md border cursor-pointer  hover:bg-amber-100 sm:bg-amber-200"
+              onClick={handleSavePost}
+            >
+              <BookmarkSimple
+                size={24}
+                weight={saved ? "fill" : "regular"}
+                color={saved ? "green" : "black"}
+              />
+              <span className="sm:hidden">
+                {saved ? "Place Saved" : "Save Place"}
+              </span>
             </button>
           </div>
         </div>

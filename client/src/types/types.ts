@@ -56,7 +56,14 @@ enum PropertyType {
 
 export type QueryParams = {
   type?: string;
-  location?: string;
-  minPrice?: number;
-  maxPrice?: number;
+  city?: string;
+  property?: string;
+  minPrice?: string;
+  maxPrice?: string;
+  bedroom?: string;
+};
+
+export type ProfilePosts = {
+  savedPosts: Post[];
+  userPosts: Post[];
 };

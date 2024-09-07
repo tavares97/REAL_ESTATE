@@ -20,7 +20,7 @@ const ProfileUpdatePage = () => {
     const { username, email, password } = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.put(`/users/${user?.id}`, {
+      const response = await apiRequest.put(`/users/search/${user?.id}`, {
         username,
         email,
         password,

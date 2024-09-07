@@ -1,13 +1,17 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Await, Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Suspense, useEffect } from "react";
 
 import List from "../components/List";
-import Messages from "../components/Messages";
+import { ProfilePosts } from "@/types/types";
 import apiRequest from "../lib/apiRequest";
 import { useAuthStore } from "../store/authStore";
-import { useEffect } from "react";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
+
+  const { profilePostsPromise } = useLoaderData() as {
+    profilePostsPromise: Promise<ProfilePosts[]>;
+  };
 
   const { user, updateUser } = useAuthStore();
 
@@ -77,19 +81,36 @@ const ProfilePage = () => {
               </button>
             </Link>
           </div>
-          <List />
+
+          <Suspense fallback={<div>Loading...</div>}>
+            <Await
+              resolve={profilePostsPromise}
+              errorElement={<div>Error Loading Posts</div>}
+            >
+              {(profilePosts: ProfilePosts) => (
+                <List listItem={profilePosts.userPosts} />
+              )}
+            </Await>
+          </Suspense>
 
           <div>
-            <h1 className="font-light text-2xl">Saved Lists</h1>
+            <h1 className="font-light text-2xl mb-2">Saved Lists</h1>
+
+            <Suspense fallback={<div>Loading...</div>}>
+              <Await
+                resolve={profilePostsPromise}
+                errorElement={<div>Error Loading Posts</div>}
+              >
+                {(profilePosts: ProfilePosts) => (
+                  <List listItem={profilePosts.savedPosts} />
+                )}
+              </Await>
+            </Suspense>
           </div>
         </div>
       </div>
 
-      <div className="flex-2 bg-[#fcf5f3] h-full md:flex-none sm:flex-none ">
-        <div className="px-5 h-full">
-          <Messages />
-        </div>
-      </div>
+      <div className="flex-2 bg-[#fcf5f3] h-full md:hidden sm:hidden"></div>
     </div>
   );
 };

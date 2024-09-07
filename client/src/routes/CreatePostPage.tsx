@@ -55,7 +55,7 @@ const CreatePostPage = () => {
           price: parseInt(price as string),
           images,
           address,
-          city,
+          city: (city as string).toLowerCase(),
           bedroom: parseInt(bedroom as string),
           bathroom: parseInt(bathroom as string),
           latitude: parseFloat(latitude as string),

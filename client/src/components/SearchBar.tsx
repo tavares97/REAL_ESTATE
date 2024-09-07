@@ -8,9 +8,9 @@ const types = ["BUY", "RENT"];
 const SearchBar = () => {
   const [query, setQuery] = useState<QueryParams>({
     type: "BUY",
-    location: "",
-    minPrice: 0,
-    maxPrice: 1000000,
+    city: "",
+    minPrice: "0",
+    maxPrice: "1000000",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,10 +45,11 @@ const SearchBar = () => {
       >
         <input
           type="text"
-          name="location"
+          name="city"
           placeholder="City Location"
           className="px-2 w-[200px] lg:p-1 lg:w-[140px] md:w-auto sm:p-5 sm:border sm:w-full sm:rounded-md"
           onChange={handleChange}
+          value={query.city}
         />
         <input
           type="text"
@@ -58,6 +59,7 @@ const SearchBar = () => {
           placeholder="Min Price"
           className="px-2 w-[200px] lg:p-1 lg:w-[140px] md:w-auto sm:p-5 sm:border sm:w-full sm:rounded-md"
           onChange={handleChange}
+          value={query.minPrice}
         />
         <input
           type="text"
@@ -67,10 +69,11 @@ const SearchBar = () => {
           placeholder="Max Price"
           className="px-2 w-[200px] lg:p-1 lg:w-[140px] md:w-auto sm:p-5 sm:border sm:w-full sm:rounded-md"
           onChange={handleChange}
+          value={query.maxPrice}
         />
 
         <Link
-          to={`/list?type=${query.type}`}
+          to={`/list?type=${query.type}&city=${query.city}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}`}
           className="cursor-pointer hover:bg-[#fece51] hover:bg-opacity-70 bg-[#fece51] flex items-center justify-center p-3 sm:rounded-md"
         >
           <button>

@@ -8,7 +8,6 @@ interface PinProps {
 }
 
 const Pin = ({ pin }: PinProps) => {
-  console.log(pin);
   return (
     <Marker position={[pin.latitude, pin.longitude]}>
       <Popup>

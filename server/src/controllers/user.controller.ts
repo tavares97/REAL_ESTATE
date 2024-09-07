@@ -91,3 +91,30 @@ export const deleteUser = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Error deleting user", error });
   }
 };
+
+export const getSavedPosts = async (req: Request, res: Response) => {
+  const tokenUserId = req.userId;
+
+  try {
+    const userPosts = await prisma.post.findMany({
+      where: {
+        userId: tokenUserId,
+      },
+    });
+
+    const savedPosts = await prisma.savedPost.findMany({
+      where: {
+        userId: tokenUserId,
+      },
+      include: {
+        post: true,
+      },
+    });
+
+    res
+      .status(200)
+      .json({ userPosts, savedPosts: savedPosts.map((post) => post.post) });
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching saved posts", error });
+  }
+};
